@@ -4,6 +4,7 @@ import CookieLogo from '../assets/logos/CookieLogo';
 import CountsLogo from '../assets/logos/CountsLogo';
 import FlakesLogo from '../assets/logos/FlakesLogo';
 import FrootsLogo from '../assets/logos/FrootsLogo';
+import KrispiesLogo from '../assets/logos/KrispiesLogo';
 import PebblesLogo from '../assets/logos/PebblesLogo';
 import SmacksLogo from '../assets/logos/SmacksLogo';
 import TrixLogo from '../assets/logos/TrixLogo';
@@ -71,5 +72,12 @@ export const logoLinks = {
         joined_time: '2022-07-31T16:23:15.351880Z',
         player_first_name: 'Tom',
         player_last_name: 'Vasak',
+    },
+    6757943: {
+        logo: <KrispiesLogo />,
+        entry_name: 'Darwin Awards FC',
+        joined_time: '2022-08-05T02:49:17.402484Z',
+        player_first_name: 'Kevin',
+        player_last_name: 'Martin',
     },
 };

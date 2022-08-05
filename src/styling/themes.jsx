@@ -22,6 +22,7 @@ export const appMainTheme = extendTheme({
         Text: {
             baseStyle: {
                 style: { color: colorThemes.brand.light },
+                fontFamily: 'Roboto Condensed',
             },
         },
         Heading: {
@@ -45,7 +46,7 @@ export const appMainTheme = extendTheme({
                     _text: {
                         style: {
                             textDecoration: 'none',
-                            color: colorThemes.brand.dark,
+                            color: 'lightblue',
                         },
                     },
                 },
