@@ -3,28 +3,56 @@ import { ScrollView, Text, VStack } from 'native-base';
 import { Fragment } from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import TeamCard from '../../components/TeamCard/TeamCard';
+import { getWithExpiry, setWithExpiry } from '../../res/localStorageExpiry';
+import { useManagerStore } from '../../states/Managers';
 
 const Standings = (props) => {
-    const [users, setUsers] = React.useState([]);
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [error, setError] = React.useState(null);
 
+    // Bind Manager State
+    const managerStore = useManagerStore();
+    const managers =
+        managerStore.managers.length > 0 ? managerStore.managers : null;
+
+    // Sort the Array
+    if (managers) {
+        managers.sort((a, b) => b.event_total - a.event_total);
+    }
+
+    // On-Load hook to query API
     React.useEffect(() => {
-        fetch('/api/leagues-classic/1016416/standings/', {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then((res) => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setUsers(result.new_entries.results);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
+        managerStore.fetch();
+        setIsLoaded(true);
+        /*
+        const getUsers = async () => {
+            const response = await fetch(
+                '/api/leagues-classic/1016416/standings/',
+                {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
                 },
             );
+            const result = await response.json();
+            setIsLoaded(true);
+            setUsers(result.standings.results);
+            setWithExpiry(
+                'users',
+                JSON.stringify(result.standings.results),
+                60000,
+            );
+        };
+        const tempUsers = getWithExpiry('users');
+
+        if (tempUsers === null || tempUsers === undefined) {
+            getUsers();
+        } else if (tempUsers.length === 0) {
+            getUsers();
+        } else {
+            setUsers(JSON.parse(tempUsers));
+            setIsLoaded(true);
+        }
+        */
     }, []);
 
     return (
@@ -32,16 +60,13 @@ const Standings = (props) => {
             <Text fontSize={'2em'} mb={3}>
                 FPL Standings
             </Text>
-            <LoadingSpinner
-                color="gray"
-                height="80"
-                width="80"
-                visible={!isLoaded}
-            />
+            <LoadingSpinner height="80" width="80" visible={!isLoaded} />
             <ScrollView w={'80%'} maxW={'400px'}>
-                {users.map((u, i) => (
-                    <TeamCard user={u} key={u.entry} rank={i + 1} />
-                ))}
+                {managers
+                    ? managers.map((m, i) => (
+                          <TeamCard user={m} key={m.entry} rank={i + 1} />
+                      ))
+                    : null}
             </ScrollView>
         </Fragment>
     );

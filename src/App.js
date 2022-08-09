@@ -6,11 +6,13 @@ import DrawerNav from './components/DrawerNav/DrawerNav';
 import HeaderNavBar from './components/HeaderNavBar/HeaderNavBar';
 import { GetScreenType } from './states/ScreenQuery';
 import { Outlet } from 'react-router-dom';
+import { RoundRobinCreator } from './res/roundRobinCreator';
 
 function App() {
     // Determine Screen Type
     GetScreenType();
 
+    RoundRobinCreator(3);
     return (
         <View w={'100%'} h="100%" display="flex" alignItems={'center'}>
             <DrawerNav />

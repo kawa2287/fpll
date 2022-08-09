@@ -53,7 +53,7 @@ const TeamCard = (props) => {
                         style={{ color: 'darkgray' }}
                         fontSize="0.8em"
                     >
-                        {`${user.player_first_name} ${user.player_last_name}`}
+                        {`${user.player_name} `}
                     </Text>
                 </VStack>
                 <Text
@@ -62,8 +62,9 @@ const TeamCard = (props) => {
                     textAlign={'center'}
                     fontSize="2xl"
                     fontWeight={500}
+                    style={{ color: 'gold' }}
                 >
-                    0
+                    {user.event_total}
                 </Text>
             </HStack>
         </Box>

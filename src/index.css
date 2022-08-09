@@ -45,3 +45,8 @@ a:active {
     text-decoration: none;
     color: white;
 }
+
+html {
+    overflow-y: scroll;
+    overflow-y: overlay;
+}
