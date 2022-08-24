@@ -7,10 +7,45 @@ import HeaderNavBar from './components/HeaderNavBar/HeaderNavBar';
 import { GetScreenType } from './states/ScreenQuery';
 import { Outlet } from 'react-router-dom';
 import { RoundRobinCreator } from './res/roundRobinCreator';
+import { useManagerStore } from './states/Managers';
+import { useBootstrapStaticStore } from './states/BootstrapStatic';
+import { useGameweekStatsStore } from './states/GameweekStats';
 
 function App() {
     // Determine Screen Type
     GetScreenType();
+
+    // Get Stores
+    const managerStore = useManagerStore();
+    const bootstrapStore = useBootstrapStaticStore();
+    const gameweekStatsStore = useGameweekStatsStore();
+    const gw = bootstrapStore.currentGW;
+
+    // Handle API calls here (this will be called upon loading any route)
+    React.useEffect(() => {
+        managerStore.fetch();
+        bootstrapStore.fetch();
+    }, []);
+
+    // Secondary Hooks to Build Data
+    React.useEffect(() => {
+        gameweekStatsStore.fetch(managerStore.managers, gw, bootstrapStore);
+        gameweekStatsStore.fetchAllGameWeekStats(gw);
+        managerStore.fetchAllTimeOwnedPlayers(managerStore.managers, gw);
+    }, [managerStore.managers, bootstrapStore, gw]);
+
+    // Build the manager stats
+    React.useEffect(() => {
+        managerStore.generateManagerStats(
+            managerStore.managerPlayers_alltime,
+            gameweekStatsStore.allGameweekStats,
+            bootstrapStore.players,
+        );
+    }, [
+        managerStore.managerPlayers_alltime,
+        gameweekStatsStore.allGameweekStats,
+        bootstrapStore.players,
+    ]);
 
     RoundRobinCreator(3);
     return (

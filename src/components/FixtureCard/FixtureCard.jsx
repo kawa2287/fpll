@@ -32,7 +32,6 @@ const FixtureCard = (props) => {
         gameweekStatsStore.managerPicks,
         fixture,
     );
-    console.log(activeManagers);
     return (
         <Accordion
             style={{
@@ -53,11 +52,11 @@ const FixtureCard = (props) => {
                         justifyContent={'space-evenly'}
                         fontSize="0.8em"
                     >
-                        {fixture.started && !fixture.finished_provisional ? (
+                        {/*fixture.started && !fixture.finished_provisional ? (
                             <Badge variant={'outline-success'} mt={1}>
                                 {`${fixture.minutes}"`}
                             </Badge>
-                        ) : null}
+                        ) : null*/}
                         {!fixture.started ? (
                             <VStack>
                                 <Text fontSize={'0.8em'}>
@@ -70,7 +69,7 @@ const FixtureCard = (props) => {
                         ) : null}
 
                         {fixture.started && !fixture.finished_provisional ? (
-                            <Badge variant={'outline'} mt={1}>
+                            <Badge variant={'outline'} bg="amber.900" mt={1}>
                                 LIVE
                             </Badge>
                         ) : null}

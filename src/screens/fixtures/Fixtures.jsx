@@ -22,10 +22,9 @@ const Fixtures = (props) => {
     const bootstrapStore = useBootstrapStaticStore();
     const gameweekStatsStore = useGameweekStatsStore();
     const plTeams = bootstrapStore.plTeams;
-    console.log(gameweekStatsStore);
 
     React.useEffect(() => {
-        bootstrapStore.fetch();
+        //bootstrapStore.fetch();
         setBootStrapIsLoaded(true);
         /*
         const tempBootstrap = getWithExpiry('bootstrap');
@@ -58,7 +57,7 @@ const Fixtures = (props) => {
     }, []);
 
     React.useEffect(() => {
-        gameweekStatsStore.fetch(managers, gw, bootstrapStore);
+        //gameweekStatsStore.fetch(managers, gw, bootstrapStore);
     }, [gw, managers, bootstrapStore]);
 
     React.useEffect(() => {
@@ -92,7 +91,12 @@ const Fixtures = (props) => {
 
     return (
         <Fragment>
-            <Text>Fixtures</Text>
+            <Text
+                mb="5"
+                mt="3"
+                fontSize="2em"
+                fontWeight="100"
+            >{`Fixtures For GW ${bootstrapStore.currentGW}`}</Text>
             <LoadingSpinner
                 height="80"
                 width="80"
@@ -100,7 +104,10 @@ const Fixtures = (props) => {
             />
             <ScrollView w="90%" h="100%" maxW={'500px'} overflowY="scroll">
                 {fixtureResponse
-                    ? CreateGameWeek(fixtureResponse, 1).map((match) => (
+                    ? CreateGameWeek(
+                          fixtureResponse,
+                          bootstrapStore.currentGW,
+                      ).map((match) => (
                           <FixtureCard
                               key={match.id}
                               fixture={match}

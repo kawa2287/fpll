@@ -29,13 +29,23 @@ const TeamCard = (props) => {
                 >
                     {rank}
                 </Text>
-                <Center w={'15%'}>
+                <Text
+                    w={'5%'}
+                    alignSelf="center"
+                    textAlign={'center'}
+                    fontSize="lg"
+                    fontWeight={100}
+                    style={{ color: DetermineMovement(user).color }}
+                >
+                    {DetermineMovement(user).char}
+                </Text>
+                <Center w={'15%'} p="0.5">
                     {user.entry in logoLinks
                         ? logoLinks[user.entry].logo
                         : null}
                 </Center>
                 <VStack
-                    w={'55%'}
+                    w={'45%'}
                     ml={2}
                     alignItems={'center'}
                     justifyContent="center"
@@ -43,7 +53,7 @@ const TeamCard = (props) => {
                     <Text
                         alignSelf="start"
                         justifySelf={'center'}
-                        fontSize="1em"
+                        fontSize="0.8em"
                     >
                         {user.entry_name.toUpperCase()}
                     </Text>
@@ -51,20 +61,30 @@ const TeamCard = (props) => {
                         alignSelf="start"
                         fontWeight={100}
                         style={{ color: 'darkgray' }}
-                        fontSize="0.8em"
+                        fontSize="0.6em"
                     >
                         {`${user.player_name} `}
                     </Text>
                 </VStack>
                 <Text
-                    w={'20%'}
+                    w={'12.5%'}
                     alignSelf="center"
                     textAlign={'center'}
-                    fontSize="2xl"
+                    fontSize="1.1em"
+                    fontWeight={100}
+                    style={{ color: 'lightblue' }}
+                >
+                    {user.event_total}
+                </Text>
+                <Text
+                    w={'12.5%'}
+                    alignSelf="center"
+                    textAlign={'center'}
+                    fontSize="1.1em"
                     fontWeight={500}
                     style={{ color: 'gold' }}
                 >
-                    {user.event_total}
+                    {user.total}
                 </Text>
             </HStack>
         </Box>
@@ -80,3 +100,13 @@ export default TeamCard;
  * @property {string} player_last_name
  *
  */
+
+const DetermineMovement = (user) => {
+    if (user.rank > user.last_rank) {
+        return { char: '▼', color: 'red' };
+    } else if (user.rank < user.last_rank) {
+        return { char: '▲', color: 'lightgreen' };
+    } else {
+        return { char: '-', color: 'white' };
+    }
+};

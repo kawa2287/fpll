@@ -5,7 +5,6 @@ import { RoundRobinCreator } from '../res/roundRobinCreator';
 export const useMatchesStore = create((set) => ({
     matchups: [],
     setMatchups: (rounds, managers) => {
-        console.log(managers);
         set({ matchups: RoundRobinCreator(rounds, managers) });
     },
 }));
