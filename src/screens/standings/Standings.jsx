@@ -3,8 +3,8 @@ import { ScrollView, Text, Box } from 'native-base';
 import { Fragment } from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import TeamCard from '../../components/TeamCard/TeamCard';
-import { useManagerStore } from '../../states/Managers';
-import { useScreenTypeStore } from '../../states/ScreenQuery';
+import { useManagerStore } from '../../states/store_Managers';
+import { useScreenTypeStore } from '../../states/store_ScreenQuery';
 import TeamCardHeader from '../../components/TeamCard/TeamCardHeader';
 
 const Standings = (props) => {

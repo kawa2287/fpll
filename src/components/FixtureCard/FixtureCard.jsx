@@ -1,15 +1,15 @@
 import moment from 'moment-timezone';
 import React from 'react';
 import { Badge, Box, Center, HStack, Text, VStack } from 'native-base';
-import '../../schemas/api/fixtures';
-import '../../schemas/api/bootstrapStatic';
+import '../../schemas/api/type_fixtures';
+import '../../schemas/api/type_bootstrapStatic';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getWithExpiry } from '../../res/localStorageExpiry';
 import FixturePointsChart from '../FixturePointsChart/FixturePointsChart';
-import { useGameweekStatsStore } from '../../states/GameweekStats';
+import { useGameweekStatsStore } from '../../states/store_GameweekStats';
 import { logoLinks } from '../../static/LogoLinks';
 
 /**

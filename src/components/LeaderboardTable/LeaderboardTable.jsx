@@ -6,8 +6,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Heading } from 'native-base';
+import { Center, Heading } from 'native-base';
 import './TableStyle.css';
+import { logoLinks } from '../../static/LogoLinks';
 
 /**
  *
@@ -20,7 +21,7 @@ import './TableStyle.css';
  * @returns
  */
 const LeaderboardTable = (props) => {
-    const { stat, statLabel, title, managerStats } = props;
+    const { stat, statLabel, title, managerStats, gameweeks } = props;
 
     if (managerStats.length > 0) {
         const rows = GenerateData(managerStats, stat);
@@ -32,17 +33,20 @@ const LeaderboardTable = (props) => {
                     <Table size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <TableCell style={{ width: '15%' }}>
+                                <TableCell style={{ width: '5%' }}>
                                     Rank
                                 </TableCell>
-                                <TableCell style={{ width: '15%' }}>
+                                <TableCell style={{ width: '5%' }}>
                                     Logo
                                 </TableCell>
-                                <TableCell style={{ width: '55%' }}>
+                                <TableCell style={{ width: '70%' }}>
                                     Team
                                 </TableCell>
-                                <TableCell style={{ width: '15%' }}>
+                                <TableCell style={{ width: '10%' }}>
                                     {statLabel}
+                                </TableCell>
+                                <TableCell style={{ width: '10%' }}>
+                                    {'WkAvg'}
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -57,14 +61,29 @@ const LeaderboardTable = (props) => {
                                         color: 'white',
                                     }}
                                 >
-                                    <TableCell component="th" scope="row">
+                                    <TableCell
+                                        component="th"
+                                        scope="row"
+                                        style={{ color: 'gold' }}
+                                    >
                                         {i + 1}
                                     </TableCell>
-                                    <TableCell></TableCell>
+                                    <TableCell>
+                                        <Center w={'100%'}>
+                                            {logoLinks[row.manager.entry].logo}
+                                        </Center>
+                                    </TableCell>
                                     <TableCell>
                                         {row.manager.entry_name}
                                     </TableCell>
-                                    <TableCell>{row.stats[stat]}</TableCell>
+                                    <TableCell>
+                                        {row.stats[stat].toFixed(0)}
+                                    </TableCell>
+                                    <TableCell>
+                                        {(row.stats[stat] / gameweeks).toFixed(
+                                            2,
+                                        )}
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -82,7 +101,6 @@ export default LeaderboardTable;
 const s = {
     table: {
         background: 'rgba(0, 0, 0, 0.1)',
-        tableLayout: 'fixed',
     },
 };
 

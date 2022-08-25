@@ -1,5 +1,5 @@
 import { HStack, Text, Box, StatusBar } from 'native-base';
-import { useScreenTypeStore } from '../../states/ScreenQuery';
+import { useScreenTypeStore } from '../../states/store_ScreenQuery';
 import HeaderDesktop from './desktop/HeaderDesktop';
 import HeaderMobile from './mobile/HeaderMobile';
 

@@ -4,12 +4,12 @@ import { View } from 'native-base';
 
 import DrawerNav from './components/DrawerNav/DrawerNav';
 import HeaderNavBar from './components/HeaderNavBar/HeaderNavBar';
-import { GetScreenType } from './states/ScreenQuery';
+import { GetScreenType } from './states/store_ScreenQuery';
 import { Outlet } from 'react-router-dom';
 import { RoundRobinCreator } from './res/roundRobinCreator';
-import { useManagerStore } from './states/Managers';
-import { useBootstrapStaticStore } from './states/BootstrapStatic';
-import { useGameweekStatsStore } from './states/GameweekStats';
+import { useManagerStore } from './states/store_Managers';
+import { useBootstrapStaticStore } from './states/store_BootstrapStatic';
+import { useGameweekStatsStore } from './states/store_GameweekStats';
 
 function App() {
     // Determine Screen Type

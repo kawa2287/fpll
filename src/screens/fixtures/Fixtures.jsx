@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import { Box, Center, ScrollView, Text } from 'native-base';
-import '../../schemas/api/bootstrapStatic';
-import '../../schemas/api/fixtures';
+import '../../schemas/api/type_bootstrapStatic';
+import '../../schemas/api/type_fixtures';
 import FixtureCard from '../../components/FixtureCard/FixtureCard';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { getWithExpiry, setWithExpiry } from '../../res/localStorageExpiry';
-import { useManagerStore } from '../../states/Managers';
-import { useBootstrapStaticStore } from '../../states/BootstrapStatic';
-import { useGameweekStatsStore } from '../../states/GameweekStats';
+import { useManagerStore } from '../../states/store_Managers';
+import { useBootstrapStaticStore } from '../../states/store_BootstrapStatic';
+import { useGameweekStatsStore } from '../../states/store_GameweekStats';
 
 const Fixtures = (props) => {
     const [fixtureResponse, setFixtureResponse] = React.useState(null);
@@ -26,34 +26,6 @@ const Fixtures = (props) => {
     React.useEffect(() => {
         //bootstrapStore.fetch();
         setBootStrapIsLoaded(true);
-        /*
-        const tempBootstrap = getWithExpiry('bootstrap');
-        if (tempBootstrap === null || tempBootstrap === undefined) {
-            fetch('/api/bootstrap-static/', {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-            })
-                .then((res) => res.json())
-                .then(
-                    (result) => {
-                        setBootStrapIsLoaded(true);
-                        setApiResponse(result);
-                        setWithExpiry(
-                            'bootstrap',
-                            JSON.stringify(result),
-                            60000,
-                        );
-                    },
-                    (error) => {
-                        setBootStrapIsLoaded(true);
-                        setError(error);
-                    },
-                );
-        } else {
-            setApiResponse(JSON.parse(tempBootstrap));
-            setBootStrapIsLoaded(true);
-        }
-        */
     }, []);
 
     React.useEffect(() => {

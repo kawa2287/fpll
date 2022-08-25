@@ -1,5 +1,21 @@
-.MuiTableCell-root {
-    border-color: white;
-    color: white;
+.MuiPaper-root {
+    max-width: 400px;
+}
+.MuiTable-root {
+    max-width: 400px;
+    width: 400px;
+}
+.MuiTable-root .MuiTableCell-root {
     font-family: 'Roboto Condensed';
+    color: white;
+    border: 0;
+    font-size: 0.9em;
+}
+
+.MuiTable-root .MuiTableHead-root {
+    border-bottom: 1px solid white;
+}
+
+.MuiTable-root .MuiTableBody-root tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.2);
 }

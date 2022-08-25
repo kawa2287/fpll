@@ -1,9 +1,9 @@
 import { Center, Divider, HStack, ScrollView, Text } from 'native-base';
 import React, { Fragment } from 'react';
 import { RoundRobinCreator } from '../../res/roundRobinCreator';
-import { useBootstrapStaticStore } from '../../states/BootstrapStatic';
-import { useManagerStore } from '../../states/Managers';
-import { useMatchesStore } from '../../states/Matchups';
+import { useBootstrapStaticStore } from '../../states/store_BootstrapStatic';
+import { useManagerStore } from '../../states/store_Managers';
+import { useMatchesStore } from '../../states/store_Matchups';
 import { logoLinks } from '../../static/LogoLinks';
 
 const Matchups = (props) => {
