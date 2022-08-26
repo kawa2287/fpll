@@ -2,6 +2,7 @@ import create from 'zustand';
 import {
     GenerateManagerStats,
     GetAllOwnedPlayersForMangers,
+    GetManagerHistory,
 } from '../res/services/ManagerService';
 
 // Create Store
@@ -9,6 +10,7 @@ export const useManagerStore = create((set) => ({
     managers: [],
     managerPlayers_alltime: [],
     managerPlayerStats: [],
+    managerHistories: [],
     standingsLoaded: false,
     managerStatsLoaded: false,
     fetch: async () => {
@@ -26,4 +28,5 @@ export const useManagerStore = create((set) => ({
             players,
             set,
         ),
+    fetchManagerHistories: (managers) => GetManagerHistory(managers, set),
 }));

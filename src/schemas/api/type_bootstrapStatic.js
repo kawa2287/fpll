@@ -1,31 +1,6 @@
 /**
  * @typedef {object} API_bootstrapStatic
- * @property {object[]} events
- * @property {number} events.id
- * @property {string} events.name
- * @property {string} events.deadline_time
- * @property {number} events.average_entry_score
- * @property {boolean} events.finished
- * @property {boolean} events.data_checked
- * @property {null} events.highest_scoring_entry
- * @property {number} events.deadline_time_epoch
- * @property {number} events.deadline_time_game_offset
- * @property {null} events.highest_score
- * @property {boolean} events.is_previous
- * @property {boolean} events.is_current
- * @property {boolean} events.is_next
- * @property {boolean} events.cup_leagues_created
- * @property {boolean} events.h2h_ko_matches_created
- * @property {object[]|} events.chip_plays
- * @property {string} events.chip_plays.chip_name
- * @property {number} events.chip_plays.num_played
- * @property {null} events.most_selected
- * @property {null} events.most_transferred_in
- * @property {null} events.top_element
- * @property {null} events.top_element_info
- * @property {number} events.transfers_made
- * @property {null} events.most_captained
- * @property {null} events.most_vice_captained
+ * @property {Events[]} events
  * @property {object} game_settings
  * @property {number} game_settings.league_join_private_max
  * @property {number} game_settings.league_join_public_max
@@ -166,4 +141,33 @@
  * @property {boolean} element_types.ui_shirt_specific
  * @property {number[]|} element_types.sub_positions_locked
  * @property {number} element_types.element_count
+ */
+
+/**
+ * @typeDef Events
+ * @property {number} id
+ * @property {string} name
+ * @property {string} deadline_time
+ * @property {number} average_entry_score
+ * @property {boolean} finished
+ * @property {boolean} data_checked
+ * @property {null} highest_scoring_entry
+ * @property {number} deadline_time_epoch
+ * @property {number} deadline_time_game_offset
+ * @property {null} highest_score
+ * @property {boolean} is_previous
+ * @property {boolean} is_current
+ * @property {boolean} is_next
+ * @property {boolean} cup_leagues_created
+ * @property {boolean} h2h_ko_matches_created
+ * @property {object[]|} chip_plays
+ * @property {string} chip_plays.chip_name
+ * @property {number} chip_plays.num_played
+ * @property {null} most_selected
+ * @property {null} most_transferred_in
+ * @property {null} top_element
+ * @property {null} top_element_info
+ * @property {number} transfers_made
+ * @property {null} most_captained
+ * @property {null} most_vice_captained
  */

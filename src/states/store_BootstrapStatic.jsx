@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { DetermineCurrentGameweek } from '../res/services/EventService';
+import { DetermineGameweek } from '../res/services/EventService';
 import '../schemas/api/type_bootstrapStatic';
 // Create Store
 export const useBootstrapStaticStore = create((set) => ({
@@ -8,6 +8,8 @@ export const useBootstrapStaticStore = create((set) => ({
     events: [],
     phases: [],
     currentGW: 1,
+    nextGW: 1,
+    previousGW: 1,
     fetch: async () => {
         const response = await fetch('/api/bootstrap-static/');
         const result = await response.json();
@@ -15,6 +17,8 @@ export const useBootstrapStaticStore = create((set) => ({
         set({ players: result.elements });
         set({ events: result.events });
         set({ phases: result.phases });
-        set({ currentGW: DetermineCurrentGameweek(result) });
+        set({ currentGW: DetermineGameweek(result, 'is_current') });
+        set({ nextGW: DetermineGameweek(result, 'is_next') });
+        set({ previousGW: DetermineGameweek(result, 'is_previous') });
     },
 }));

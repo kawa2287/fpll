@@ -1,7 +1,8 @@
 /**
  *
  * @param {number} rounds
- * @param {object[]} nTeams
+ * @param {Manager[]} managers
+ * @returns {LeagueB_WeekMatchups[]}
  */
 export const RoundRobinCreator = (rounds, managers) => {
     let leftArray = [];
@@ -47,7 +48,15 @@ export const RoundRobinCreator = (rounds, managers) => {
 
                 // Add matchups
                 for (let j = 0; j < leftArray.length; j++) {
-                    matchups.push([leftArray[j], rightArray[j]]);
+                    matchups.push({
+                        managers: [leftArray[j], rightArray[j]],
+                        teamA_entry: leftArray[j].entry,
+                        teamB_entry: rightArray[j].entry,
+                        teamA_score: '',
+                        teamB_score: '',
+                        winner_entry: null,
+                        loser_entry: null,
+                    });
                 }
 
                 // Add matchups to masterMatchups

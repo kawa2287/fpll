@@ -1,5 +1,3 @@
-import { Text } from 'native-base';
-import { Fragment } from 'react';
 import { Triangle } from 'react-loader-spinner';
 
 /**

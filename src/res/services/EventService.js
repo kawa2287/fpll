@@ -1,11 +1,12 @@
 /**
  *
  * @param {API_bootstrapStatic} result
+ * @param {('is_current'|'is_next'|'is_previous')} type
  */
-export const DetermineCurrentGameweek = (result) => {
+export const DetermineGameweek = (result, type) => {
     let events = result.events;
     for (let i = 0; i < events.length; i++) {
-        if (events[i].is_current) {
+        if (events[i][type]) {
             return events[i].id;
         }
     }
@@ -13,11 +14,23 @@ export const DetermineCurrentGameweek = (result) => {
 
 /**
  *
- * @param {API_bootstrapStatic} bootstrap
+ * @param {number} gameweek
+ * @param {Events} events
  */
 export const DetermineIfGameweekHasBegun = (gameweek, events) => {
     if (events.length > 0) {
         return !events[gameweek].is_previous;
+    }
+};
+
+/**
+ *
+ * @param {number} gameweek
+ * @param {Events} events
+ */
+export const DetermineIfGameweekIsComplete = (gameweek, events) => {
+    if (events.length > 0) {
+        return events[gameweek - 1].finished;
     }
 };
 

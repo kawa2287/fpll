@@ -95,7 +95,6 @@ export const GenerateManagerStats = (
             managerStats.push({ manager: manager.manager, stats: statObj });
         });
         // Set State
-        console.log(managerStats);
         set({ managerPlayerStats: managerStats });
         set({ managerStatsLoaded: true });
     }
@@ -146,4 +145,30 @@ export const GetAllTransfers = async (managerID) => {
     const result = await response.json();
 
     return result;
+};
+
+/**
+ *
+ * @param {Manager[]} managers
+ * @param {*} set
+ * @returns {API_ManagerHistory}
+ */
+export const GetManagerHistory = async (managers, set) => {
+    // Loop through each manager and retrieve their GW histories
+    let managerHistories = [];
+    for await (let m of managers) {
+        try {
+            const response = await fetch(`/api/entry/${m.entry}/history/`);
+            const result = await response.json();
+
+            // add in manager enrty to object for future reference
+            result['entry'] = m.entry;
+
+            managerHistories.push(result);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    set({ managerHistories: managerHistories });
 };

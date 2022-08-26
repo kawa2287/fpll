@@ -10,6 +10,7 @@ import { RoundRobinCreator } from './res/roundRobinCreator';
 import { useManagerStore } from './states/store_Managers';
 import { useBootstrapStaticStore } from './states/store_BootstrapStatic';
 import { useGameweekStatsStore } from './states/store_GameweekStats';
+import { useLeagueB_store } from './states/store_LeagueB';
 
 function App() {
     // Determine Screen Type
@@ -19,6 +20,7 @@ function App() {
     const managerStore = useManagerStore();
     const bootstrapStore = useBootstrapStaticStore();
     const gameweekStatsStore = useGameweekStatsStore();
+    const leagueB_Store = useLeagueB_store();
     const gw = bootstrapStore.currentGW;
 
     // Handle API calls here (this will be called upon loading any route)
@@ -32,6 +34,8 @@ function App() {
         gameweekStatsStore.fetch(managerStore.managers, gw, bootstrapStore);
         gameweekStatsStore.fetchAllGameWeekStats(gw);
         managerStore.fetchAllTimeOwnedPlayers(managerStore.managers, gw);
+        managerStore.fetchManagerHistories(managerStore.managers);
+        leagueB_Store.setMatchups(3, managerStore.managers);
     }, [managerStore.managers, bootstrapStore, gw]);
 
     // Build the manager stats
@@ -47,7 +51,21 @@ function App() {
         bootstrapStore.players,
     ]);
 
-    RoundRobinCreator(3);
+    // Create League B Stats
+    React.useEffect(() => {
+        leagueB_Store.populateResults(
+            managerStore.managerHistories,
+            leagueB_Store.matchups,
+            managerStore.managers,
+            bootstrapStore.events,
+        );
+    }, [
+        managerStore.managerHistories,
+        managerStore.managers,
+        leagueB_Store.matchups,
+        bootstrapStore.events,
+    ]);
+
     return (
         <View w={'100%'} h="100%" display="flex" alignItems={'center'}>
             <DrawerNav />
