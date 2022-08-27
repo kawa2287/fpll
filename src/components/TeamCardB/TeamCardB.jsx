@@ -1,6 +1,7 @@
 import { Box, Center, HStack, Text, VStack } from 'native-base';
 import React from 'react';
 import { logoLinks } from '../../static/LogoLinks';
+import TeamLogo from '../TeamLogo.jsx/TeamLogo';
 
 /**
  *
@@ -36,9 +37,7 @@ const TeamCardB = (props) => {
                     fontWeight={100}
                 ></Text>
                 <Center w={'15%'} p="0.5">
-                    {team.manager.entry in logoLinks
-                        ? logoLinks[team.manager.entry].logo
-                        : null}
+                    <TeamLogo entry={team.manager.entry} />
                 </Center>
                 <VStack
                     w={'25%'}

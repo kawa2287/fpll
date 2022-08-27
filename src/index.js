@@ -11,6 +11,8 @@ import Insights from './screens/insights/Insights';
 import Matchups from './screens/matchups/Matchups';
 import Leaderboards from './screens/leaderboards/Leaderboards';
 import StandingsB from './screens/standingsB/StandingsB';
+import Teams from './screens/Teams/Teams';
+import TeamInfo from './components/TeamInfo/TeamInfo';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -30,6 +32,9 @@ root.render(
                         <Route path="fixtures" element={<Fixtures />}></Route>
                         <Route path="insights" element={<Insights />}></Route>
                         <Route path="matchups" element={<Matchups />}></Route>
+                        <Route path="teams" element={<Teams />}>
+                            <Route path=":teamEntry" element={<TeamInfo />} />
+                        </Route>
                         <Route
                             path="leaderboards"
                             element={<Leaderboards />}
