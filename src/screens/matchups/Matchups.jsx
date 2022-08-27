@@ -45,9 +45,9 @@ const Matchups = (props) => {
 
     return (
         <Fragment>
-            <Text fontSize={'2em'} mb={3}>
-                Fantasy Premiere League League Test League B
-            </Text>
+            <Heading fontSize={'1.5em'} mb={3} textAlign="center">
+                H2H Matchups
+            </Heading>
             {leagueB_Store.matchupsLoaded ? (
                 <ScrollView w={'80%'} maxW={'400px'} mb="5">
                     <MatchupTable
