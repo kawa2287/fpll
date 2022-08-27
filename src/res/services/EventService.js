@@ -90,7 +90,9 @@ export const GetManagerPicksForGameWeek = async (
             }
         }
     }
-    set({ managerPicks: managerPicks });
+    if (managerPicks.length > 0) {
+        set({ managerPicks: managerPicks, mangerPickesLoaded: true });
+    }
 };
 
 export const FetchAllGameweekStats = async (gw, set) => {

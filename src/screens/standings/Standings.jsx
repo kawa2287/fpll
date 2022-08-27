@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, Box, Heading } from 'native-base';
+import { ScrollView, Box, Heading } from 'native-base';
 import { Fragment } from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import TeamCard from '../../components/TeamCard/TeamCard';

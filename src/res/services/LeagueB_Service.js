@@ -194,7 +194,7 @@ const SetWinsLossesTies = (teamA, teamB, match) => {
         teamB.wins += 1;
         teamB.standingsPoints += 2;
     }
-    if (match.teamA_score == match.teamB_score) {
+    if (match.teamA_score === match.teamB_score) {
         teamA.ties += 1;
         teamB.ties += 1;
         teamA.standingsPoints += 1;

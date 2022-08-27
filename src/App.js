@@ -6,11 +6,11 @@ import DrawerNav from './components/DrawerNav/DrawerNav';
 import HeaderNavBar from './components/HeaderNavBar/HeaderNavBar';
 import { GetScreenType } from './states/store_ScreenQuery';
 import { Outlet } from 'react-router-dom';
-import { RoundRobinCreator } from './res/roundRobinCreator';
 import { useManagerStore } from './states/store_Managers';
 import { useBootstrapStaticStore } from './states/store_BootstrapStatic';
 import { useGameweekStatsStore } from './states/store_GameweekStats';
 import { useLeagueB_store } from './states/store_LeagueB';
+import { useFixtureStore } from './states/store_Fixtures';
 
 function App() {
     // Determine Screen Type
@@ -21,12 +21,14 @@ function App() {
     const bootstrapStore = useBootstrapStaticStore();
     const gameweekStatsStore = useGameweekStatsStore();
     const leagueB_Store = useLeagueB_store();
+    const fixtureStore = useFixtureStore();
     const gw = bootstrapStore.currentGW;
 
     // Handle API calls here (this will be called upon loading any route)
     React.useEffect(() => {
         managerStore.fetch();
         bootstrapStore.fetch();
+        fixtureStore.fetch();
     }, []);
 
     // Secondary Hooks to Build Data

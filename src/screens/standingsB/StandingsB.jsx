@@ -1,4 +1,4 @@
-import { Box, Heading, ScrollView, Text } from 'native-base';
+import { Box, Heading, ScrollView } from 'native-base';
 import React, { Fragment } from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import TeamCardB from '../../components/TeamCardB/TeamCardB';
