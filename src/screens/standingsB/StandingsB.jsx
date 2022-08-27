@@ -13,7 +13,9 @@ const StandingsB = () => {
     /** @type {LeagueB_Standings_Item[]} */
     let standings = leagueB_store.standings;
     standings = standings.sort(
-        (a, b) => b.standingsPoints - a.standingsPoints || b.points - a.points,
+        (a, b) =>
+            b.standingsPoints - a.standingsPoints ||
+            b.pointsFor - b.pointsAgainst - (a.pointsFor - a.pointsAgainst),
     );
 
     return (
