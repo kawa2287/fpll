@@ -1,4 +1,4 @@
-import { Divider, Heading, ScrollView, Text } from 'native-base';
+import { Divider, Heading, ScrollView } from 'native-base';
 import React, { Fragment } from 'react';
 import { useBootstrapStaticStore } from '../../states/store_BootstrapStatic';
 import { useLeagueB_store } from '../../states/store_LeagueB';

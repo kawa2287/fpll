@@ -7,10 +7,12 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { getWithExpiry } from '../../res/localStorageExpiry';
-import FixturePointsChart from '../FixturePointsChart/FixturePointsChart';
 import { useGameweekStatsStore } from '../../states/store_GameweekStats';
 import { logoLinks } from '../../static/LogoLinks';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import ManchesterUnitedLogo from '../../assets/epl/ManchesterUnitedLogo';
+import FulhamLogo from '../../assets/epl/FulhamLogo';
+import { EPL_LOGOS } from '../../static/EPL_logoLinks';
 
 /**
  *
@@ -25,7 +27,6 @@ const FixtureCard = (props) => {
     const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const kickoff_time_local = kickoff_time_zulu.clone().tz(localTimeZone);
 
-    const users = JSON.parse(getWithExpiry('users'));
     const gameweekStatsStore = useGameweekStatsStore();
 
     const activeManagers = DetermineManagersWithActivePlayers(
@@ -41,22 +42,17 @@ const FixtureCard = (props) => {
             }}
         >
             <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMoreIcon sx={{ color: 'gray' }} />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
                 <HStack w="100%">
                     <HStack
                         color={'gray.500'}
-                        w="30%"
+                        w="25%"
                         justifyContent={'space-evenly'}
                         fontSize="0.8em"
                     >
-                        {/*fixture.started && !fixture.finished_provisional ? (
-                            <Badge variant={'outline-success'} mt={1}>
-                                {`${fixture.minutes}"`}
-                            </Badge>
-                        ) : null*/}
                         {!fixture.started ? (
                             <VStack>
                                 <Text fontSize={'0.8em'}>
@@ -77,36 +73,75 @@ const FixtureCard = (props) => {
                             ? 'FINAL'
                             : null}
                     </HStack>
-                    <Text w="20%" textAlign={'center'}>
+
+                    <Box w="15%" overflow="hidden">
+                        <Center
+                            left="0"
+                            right="0"
+                            margin={'auto'}
+                            top="0"
+                            bottom="0"
+                            position="absolute"
+                        >
+                            {EPL_LOGOS[GetTeamName(fixture.team_a, teams)].logo}
+                        </Center>
+                    </Box>
+
+                    <Text w="15%" textAlign={'center'} fontWeight="100">
                         {GetTeamName(fixture.team_a, teams)}
                     </Text>
                     <Text w="10%" textAlign={'center'} fontSize="1em">
                         {fixture.team_a_score}
                     </Text>
-                    <Text w="10%" textAlign={'center'}>
+                    <Text
+                        w="10%"
+                        textAlign={'center'}
+                        fontSize="0.9em"
+                        fontWeight="100"
+                    >
                         @
                     </Text>
                     <Text w="10%" textAlign={'center'} fontSize="1em">
                         {fixture.team_h_score}
                     </Text>
-                    <Text w="20%" textAlign={'center'}>
+                    <Text w="20%" textAlign={'center'} fontWeight="100">
                         {GetTeamName(fixture.team_h, teams)}
                     </Text>
+                    <Box w="15%" overflow="hidden">
+                        <Center
+                            left="0"
+                            right="0"
+                            margin={'auto'}
+                            top="0"
+                            bottom="0"
+                            position="absolute"
+                        >
+                            {EPL_LOGOS[GetTeamName(fixture.team_h, teams)].logo}
+                        </Center>
+                    </Box>
                 </HStack>
             </AccordionSummary>
             <AccordionDetails>
-                {/*
-                <Box w="100%" h="20em">
-                    <FixturePointsChart />
-                        </Box>*/}
-                <HStack w="100%" flexWrap={'wrap'} justifyContent="flex-start">
-                    {activeManagers.map((m) => (
-                        <PointsChart
-                            manager={m}
-                            fixture={fixture}
-                            key={m.entry}
-                        />
-                    ))}
+                <HStack
+                    w="100%"
+                    flexWrap={'wrap'}
+                    justifyContent={
+                        gameweekStatsStore.mangerPickesLoaded
+                            ? 'flex-start'
+                            : 'center'
+                    }
+                >
+                    {gameweekStatsStore.mangerPickesLoaded ? (
+                        activeManagers.map((m) => (
+                            <PointsChart
+                                manager={m}
+                                fixture={fixture}
+                                key={m.entry}
+                            />
+                        ))
+                    ) : (
+                        <LoadingSpinner height="80" width="80" visible={true} />
+                    )}
                 </HStack>
             </AccordionDetails>
         </Accordion>
