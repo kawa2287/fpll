@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, Box } from 'native-base';
+import { ScrollView, Text, Box, Heading } from 'native-base';
 import { Fragment } from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import TeamCard from '../../components/TeamCard/TeamCard';
@@ -21,15 +21,15 @@ const Standings = (props) => {
 
     return (
         <Fragment>
-            <Text fontSize={'2em'} mb={3}>
-                FPL Standings
-            </Text>
-            <Box w={'85%'} maxW={screenType === 'desktop' ? '800px' : '400px'}>
+            <Heading fontSize={'1.5em'} mb={3}>
+                FPL Main Standings
+            </Heading>
+            <Box w={'85%'} maxW={screenType === 'desktop' ? '600px' : '400px'}>
                 <TeamCardHeader />
             </Box>
             <ScrollView
                 w={'85%'}
-                maxW={screenType === 'desktop' ? '800px' : '400px'}
+                maxW={screenType === 'desktop' ? '600px' : '400px'}
             >
                 <Box w="100%" alignItems={'center'}>
                     <LoadingSpinner

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, HStack, Text } from 'native-base';
 
-const TeamCardHeader = () => {
+const TeamCardHeaderB = () => {
     return (
         <Box
             bg="gray.800"
@@ -37,31 +37,58 @@ const TeamCardHeader = () => {
                     textAlign={'start'}
                     fontSize="0.8em"
                     fontWeight={100}
-                    w={'45%'}
+                    w={'25%'}
                 >
                     Team
                 </Text>
                 <Text
-                    w={'12.5%'}
+                    w={'12%'}
                     alignSelf="center"
                     textAlign={'center'}
                     fontSize="0.8em"
                     fontWeight={100}
                 >
-                    GW
+                    Record
                 </Text>
                 <Text
-                    w={'12.5%'}
+                    w={'8.25%'}
                     alignSelf="center"
                     textAlign={'center'}
                     fontSize="0.8em"
                     fontWeight={100}
                 >
-                    {'Total'}
+                    PF
+                </Text>
+                <Text
+                    w={'8.25%'}
+                    alignSelf="center"
+                    textAlign={'center'}
+                    fontSize="0.8em"
+                    fontWeight={100}
+                >
+                    PA
+                </Text>
+                <Text
+                    w={'8.25%'}
+                    alignSelf="center"
+                    textAlign={'center'}
+                    fontSize="0.8em"
+                    fontWeight={100}
+                >
+                    +/-
+                </Text>
+                <Text
+                    w={'8.25%'}
+                    alignSelf="center"
+                    textAlign={'center'}
+                    fontSize="0.8em"
+                    fontWeight={100}
+                >
+                    {'Pts'}
                 </Text>
             </HStack>
         </Box>
     );
 };
 
-export default TeamCardHeader;
+export default TeamCardHeaderB;

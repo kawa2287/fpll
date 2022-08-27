@@ -10,6 +10,7 @@ import Fixtures from './screens/fixtures/Fixtures';
 import Insights from './screens/insights/Insights';
 import Matchups from './screens/matchups/Matchups';
 import Leaderboards from './screens/leaderboards/Leaderboards';
+import StandingsB from './screens/standingsB/StandingsB';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +22,10 @@ root.render(
                         <Route
                             index="standings"
                             element={<Standings />}
+                        ></Route>
+                        <Route
+                            path="standingsB"
+                            element={<StandingsB />}
                         ></Route>
                         <Route path="fixtures" element={<Fixtures />}></Route>
                         <Route path="insights" element={<Insights />}></Route>
