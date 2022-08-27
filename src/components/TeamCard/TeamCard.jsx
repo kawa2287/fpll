@@ -1,5 +1,6 @@
 import { Box, Center, HStack, Text, VStack } from 'native-base';
 import { logoLinks } from '../../static/LogoLinks';
+import TeamLogo from '../TeamLogo.jsx/TeamLogo';
 
 /**
  *
@@ -39,10 +40,8 @@ const TeamCard = (props) => {
                 >
                     {DetermineMovement(user).char}
                 </Text>
-                <Center w={'15%'} p="0.5">
-                    {user.entry in logoLinks
-                        ? logoLinks[user.entry].logo
-                        : null}
+                <Center w={'15%'}>
+                    <TeamLogo entry={user.entry} />
                 </Center>
                 <VStack
                     w={'45%'}
