@@ -8,6 +8,8 @@ export const RoundRobinCreator = (rounds, managers) => {
     let leftArray = [];
     let rightArray = [];
     if (managers) {
+        // Sort managers by entry
+        managers = managers.sort((a, b) => b.entry - a.entry);
         for (let i = 0; i < managers.length; i++) {
             if (i % 2 === 0) {
                 leftArray.push(managers[i]);
