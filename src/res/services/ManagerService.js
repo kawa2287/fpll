@@ -156,17 +156,19 @@ export const GetAllTransfers = async (managerID) => {
 export const GetManagerHistory = async (managers, set) => {
     // Loop through each manager and retrieve their GW histories
     let managerHistories = [];
-    for await (let m of managers) {
-        try {
-            const response = await fetch(`/api/entry/${m.entry}/history/`);
-            const result = await response.json();
+    if (managers.length > 0) {
+        for await (let m of managers) {
+            try {
+                const response = await fetch(`/api/entry/${m.entry}/history/`);
+                const result = await response.json();
 
-            // add in manager enrty to object for future reference
-            result['entry'] = m.entry;
+                // add in manager enrty to object for future reference
+                result['entry'] = m.entry;
 
-            managerHistories.push(result);
-        } catch (error) {
-            console.error(error);
+                managerHistories.push(result);
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 

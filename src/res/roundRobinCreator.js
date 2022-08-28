@@ -10,6 +10,7 @@ export const RoundRobinCreator = (rounds, managers) => {
     if (managers) {
         // Sort managers by entry
         managers = managers.sort((a, b) => b.entry - a.entry);
+        console.log(managers);
         for (let i = 0; i < managers.length; i++) {
             if (i % 2 === 0) {
                 leftArray.push(managers[i]);

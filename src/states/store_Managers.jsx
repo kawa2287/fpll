@@ -16,7 +16,11 @@ export const useManagerStore = create((set) => ({
     fetch: async () => {
         const response = await fetch('/api/leagues-classic/1016416/standings/');
         const result = await response.json();
-        set({ managers: await result.standings.results });
+        set({
+            managers: await result.standings.results.sort(
+                (a, b) => a.entry - b.entry,
+            ),
+        });
         set({ standingsLoaded: true });
     },
     fetchAllTimeOwnedPlayers: (managers, gw) =>
