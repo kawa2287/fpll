@@ -33,7 +33,8 @@ export const PopulateResults = (
             let managerB_gws = managerHistories.find(
                 (m) => m.entry === match.teamB_entry,
             );
-            if (managerA_gws !== undefined && managerA_gws !== undefined) {
+
+            if (managerA_gws !== undefined && managerB_gws !== undefined) {
                 // Check if the managers have any info on the current gameweek
                 let managerA_Idx = managerA_gws.current.findIndex(
                     (gw) => gw.event === week.gameweek,
@@ -87,6 +88,7 @@ export const RoundRobinCreator = (rounds, managers, set) => {
     let rightArray = [];
     let masterMatchups = [];
     if (managers) {
+        managers.sort((a, b) => a.entry - b.entry);
         for (let i = 0; i < managers.length; i++) {
             if (i % 2 === 0) {
                 leftArray.push(managers[i]);
