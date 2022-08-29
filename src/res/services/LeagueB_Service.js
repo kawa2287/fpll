@@ -88,6 +88,7 @@ export const RoundRobinCreator = (rounds, managers, set) => {
     let rightArray = [];
     let masterMatchups = [];
     if (managers) {
+        managers.sort((a, b) => a.entry - b.entry);
         for (let i = 0; i < managers.length; i++) {
             if (i % 2 === 0) {
                 leftArray.push(managers[i]);

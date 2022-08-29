@@ -48,7 +48,9 @@ export const GetAllOwnedPlayersForMangers = async (managers, gw, set) => {
             });
         }
     }
-    set({ managerPlayers_alltime: managerPlayers_alltime });
+    if (managerPlayers_alltime.length > 0) {
+        set({ managerPlayers_alltime: managerPlayers_alltime });
+    }
 };
 
 /**
@@ -71,6 +73,8 @@ export const GenerateManagerStats = (
     ) {
         // Init the stats variable
         let managerStats = [];
+
+        console.log(managerPlayers_alltime);
 
         // Loop through all managers
         managerPlayers_alltime.forEach((manager) => {
