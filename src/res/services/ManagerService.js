@@ -175,6 +175,5 @@ export const GetManagerHistory = async (managers, set) => {
             }
         }
     }
-
     set({ managerHistories: managerHistories });
 };

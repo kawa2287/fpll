@@ -1,28 +1,25 @@
 import { Box, HStack } from 'native-base';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Outlet } from 'react-router-dom';
 import TeamLogo from '../../components/TeamLogo.jsx/TeamLogo';
-import { useScreenTypeStore } from '../../states/store_ScreenQuery';
 import { logoLinks } from '../../static/LogoLinks';
 
 const Teams = () => {
-    const screenStore = useScreenTypeStore();
     let teams = [];
 
-    console.log(screenStore.screenType);
-
     Object.keys(logoLinks).forEach((item) => teams.push(item));
+
     return (
-        <Box w={'85%'} maxW={'600px'}>
+        <Fragment>
             <HStack
-                w="100%"
+                w="90%"
                 bg={'#00000020'}
                 mt="2"
                 mb="2"
                 display={'flex'}
                 flexWrap="wrap"
                 flexGrow={'inherit'}
-                justifyContent={'space-between'}
+                justifyContent={'space-evenly'}
                 borderRadius="10px"
                 p={'0.5em'}
             >
@@ -33,7 +30,7 @@ const Teams = () => {
                 ))}
             </HStack>
             <Outlet />
-        </Box>
+        </Fragment>
     );
 };
 
