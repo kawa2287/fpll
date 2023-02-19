@@ -8,13 +8,7 @@ import { DetermineIfGameweekIsComplete } from './EventService';
  * @param {Events[]} events
  * @param {*} set
  */
-export const PopulateResults = (
-    managerHistories,
-    matchups,
-    managers,
-    events,
-    set,
-) => {
+export const PopulateResults = (managerHistories, matchups, managers, events, set) => {
     // Create a copy of the matchups
     /**
      * @type {LeagueB_WeekMatchups[]}
@@ -27,12 +21,8 @@ export const PopulateResults = (
         // Loop through each match in the week;
         week.matchups.forEach((match) => {
             // Check if stats exist for the managers in question
-            let managerA_gws = managerHistories.find(
-                (m) => m.entry === match.teamA_entry,
-            );
-            let managerB_gws = managerHistories.find(
-                (m) => m.entry === match.teamB_entry,
-            );
+            let managerA_gws = managerHistories.find((m) => m.entry === match.teamA_entry);
+            let managerB_gws = managerHistories.find((m) => m.entry === match.teamB_entry);
 
             if (managerA_gws !== undefined && managerB_gws !== undefined) {
                 // Check if the managers have any info on the current gameweek
@@ -45,10 +35,8 @@ export const PopulateResults = (
 
                 if (managerA_Idx !== -1 && managerB_Idx !== -1) {
                     // Found info - set stats
-                    match.teamA_score =
-                        managerA_gws.current[managerA_Idx].points;
-                    match.teamB_score =
-                        managerB_gws.current[managerB_Idx].points;
+                    match.teamA_score = managerA_gws.current[managerA_Idx].points;
+                    match.teamB_score = managerB_gws.current[managerB_Idx].points;
 
                     // Check if this is a completed week
                     if (
@@ -88,12 +76,13 @@ export const RoundRobinCreator = (rounds, managers, set) => {
     let rightArray = [];
     let masterMatchups = [];
     if (managers) {
-        managers.sort((a, b) => a.entry - b.entry);
-        for (let i = 0; i < managers.length; i++) {
+        let copyManagers = structuredClone(managers);
+        copyManagers.sort((a, b) => a.entry - b.entry);
+        for (let i = 0; i < copyManagers.length; i++) {
             if (i % 2 === 0) {
-                leftArray.push(managers[i]);
+                leftArray.push(copyManagers[i]);
             } else {
-                rightArray.push(managers[i]);
+                rightArray.push(copyManagers[i]);
             }
         }
 

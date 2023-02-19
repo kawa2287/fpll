@@ -1,12 +1,10 @@
-import { Box, ScrollView, Text, VStack } from 'native-base';
-import React, { Fragment } from 'react';
+import { Box, ScrollView, Text } from 'native-base';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import SmacksBanner from '../../assets/banners/SmacksBanner';
 import { useLeagueB_store } from '../../states/store_LeagueB';
 import { useManagerStore } from '../../states/store_Managers';
 import { logoLinks } from '../../static/LogoLinks';
 import MatchupCard from '../MatchupCard/MatchupCard';
-import MatchupHistoryCard from '../MatchupHistoryCard/MatchupHistoryCard';
 import TeamRadarChart from '../TeamRadarChart/TeamRadarChart';
 
 const TeamInfo = () => {
@@ -23,7 +21,6 @@ const TeamInfo = () => {
     }
 
     const entryMatches = GetEntryMatches(teamEntry, leagueB_store.results);
-    console.log(entryMatches);
 
     if (managerInfo !== undefined && managerInfo) {
         return (
@@ -60,7 +57,10 @@ const TeamInfo = () => {
                 </Box>
                 <Box w="400px" margin="auto">
                     {entryMatches.map((item, i) => (
-                        <MatchupCard matchup={item} />
+                        <MatchupCard
+                            matchup={item}
+                            key={item.teamA_entry + item.teamB_entry + i}
+                        />
                     ))}
                 </Box>
             </ScrollView>

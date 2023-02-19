@@ -8,7 +8,7 @@ import '../../schemas/api/type_leagueResponse.js';
  * @param {object} props
  * @param {number} props.entry
  */
-const TeamLogo = ({ entry }) => {
+const TeamLogo = ({ entry, bg = null }) => {
     return (
         <Link
             to={`/teams/${entry}`}
@@ -19,6 +19,7 @@ const TeamLogo = ({ entry }) => {
                 height: '100%',
                 justifyContent: 'center',
                 overflow: 'hidden',
+                background: bg,
             }}
         >
             {entry in logoLinks ? logoLinks[entry].logo : null}

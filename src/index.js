@@ -13,35 +13,26 @@ import Leaderboards from './screens/leaderboards/Leaderboards';
 import StandingsB from './screens/standingsB/StandingsB';
 import Teams from './screens/Teams/Teams';
 import TeamInfo from './components/TeamInfo/TeamInfo';
+import StandingsC from './screens/standingsC/StandingsC';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <NativeBaseProvider theme={appMainTheme}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<App />}>
-                        <Route
-                            index="standings"
-                            element={<Standings />}
-                        ></Route>
-                        <Route
-                            path="standingsB"
-                            element={<StandingsB />}
-                        ></Route>
-                        <Route path="fixtures" element={<Fixtures />}></Route>
-                        <Route path="insights" element={<Insights />}></Route>
-                        <Route path="matchups" element={<Matchups />}></Route>
-                        <Route path="teams" element={<Teams />}>
-                            <Route path=":teamEntry" element={<TeamInfo />} />
-                        </Route>
-                        <Route
-                            path="leaderboards"
-                            element={<Leaderboards />}
-                        ></Route>
+    <NativeBaseProvider theme={appMainTheme}>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<App />}>
+                    <Route index="standings" element={<Standings />}></Route>
+                    <Route path="standingsB" element={<StandingsB />}></Route>
+                    <Route path="standingsC" element={<StandingsC />}></Route>
+                    <Route path="fixtures" element={<Fixtures />}></Route>
+                    <Route path="insights" element={<Insights />}></Route>
+                    <Route path="matchups" element={<Matchups />}></Route>
+                    <Route path="teams" element={<Teams />}>
+                        <Route path=":teamEntry" element={<TeamInfo />} />
                     </Route>
-                </Routes>
-            </BrowserRouter>
-        </NativeBaseProvider>
-    </React.StrictMode>,
+                    <Route path="leaderboards" element={<Leaderboards />}></Route>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    </NativeBaseProvider>,
 );

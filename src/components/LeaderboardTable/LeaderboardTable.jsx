@@ -53,7 +53,7 @@ const LeaderboardTable = (props) => {
                         <TableBody>
                             {rows.map((row, i) => (
                                 <TableRow
-                                    key={row.manager.entry + stat}
+                                    key={row.manager.entry + stat + i}
                                     sx={{
                                         '&:last-child td, &:last-child th': {
                                             border: 0,
