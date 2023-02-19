@@ -1,5 +1,5 @@
 import { Box, Center, HStack, Text, VStack } from 'native-base';
-import { logoLinks } from '../../static/LogoLinks';
+
 import TeamLogo from '../TeamLogo.jsx/TeamLogo';
 
 /**
@@ -11,15 +11,11 @@ import TeamLogo from '../TeamLogo.jsx/TeamLogo';
  */
 const TeamCard = (props) => {
     // Deconstruct
-    const { user, rank } = props;
+    const { user, rank, showMovement = false } = props;
+    console.log('user', user);
 
     return (
-        <Box
-            bg="gray.800"
-            mb={1}
-            borderColor={'darkslategray'}
-            borderWidth={'1'}
-        >
+        <Box bg="gray.800" mb={1} borderColor={'darkslategray'} borderWidth={'1'}>
             <HStack w={'100%'} h="3.5em">
                 <Text
                     w={'10%'}
@@ -30,30 +26,23 @@ const TeamCard = (props) => {
                 >
                     {rank}
                 </Text>
-                <Text
-                    w={'5%'}
-                    alignSelf="center"
-                    textAlign={'center'}
-                    fontSize="lg"
-                    fontWeight={100}
-                    style={{ color: DetermineMovement(user).color }}
-                >
-                    {DetermineMovement(user).char}
-                </Text>
+                {showMovement && (
+                    <Text
+                        w={'5%'}
+                        alignSelf="center"
+                        textAlign={'center'}
+                        fontSize="lg"
+                        fontWeight={100}
+                        style={{ color: DetermineMovement(user).color }}
+                    >
+                        {DetermineMovement(user).char}
+                    </Text>
+                )}
                 <Center w={'15%'}>
                     <TeamLogo entry={user.entry} />
                 </Center>
-                <VStack
-                    w={'45%'}
-                    ml={2}
-                    alignItems={'center'}
-                    justifyContent="center"
-                >
-                    <Text
-                        alignSelf="start"
-                        justifySelf={'center'}
-                        fontSize="0.8em"
-                    >
+                <VStack w={'45%'} ml={2} alignItems={'center'} justifyContent="center">
+                    <Text alignSelf="start" justifySelf={'center'} fontSize="0.8em">
                         {user.entry_name.toUpperCase()}
                     </Text>
                     <Text

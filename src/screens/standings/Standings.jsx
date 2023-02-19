@@ -10,13 +10,14 @@ import TeamCardHeader from '../../components/TeamCard/TeamCardHeader';
 const Standings = (props) => {
     // Bind Manager State
     const managerStore = useManagerStore();
-    const managers =
-        managerStore.managers.length > 0 ? managerStore.managers : null;
+    const managers = managerStore.managers.length > 0 ? managerStore.managers : null;
     const screenType = useScreenTypeStore().screenType;
 
     // Sort the Array
+    let sortedManagers = null;
     if (managers) {
-        managers.sort((a, b) => b.total - a.total);
+        const copyManagers = structuredClone(managers);
+        sortedManagers = copyManagers.sort((a, b) => b.total - a.total);
     }
 
     return (
@@ -27,10 +28,7 @@ const Standings = (props) => {
             <Box w={'85%'} maxW={screenType === 'desktop' ? '600px' : '400px'}>
                 <TeamCardHeader />
             </Box>
-            <ScrollView
-                w={'85%'}
-                maxW={screenType === 'desktop' ? '600px' : '400px'}
-            >
+            <ScrollView w={'85%'} maxW={screenType === 'desktop' ? '600px' : '400px'}>
                 <Box w="100%" alignItems={'center'}>
                     <LoadingSpinner
                         height="80"
@@ -38,10 +36,8 @@ const Standings = (props) => {
                         visible={!managerStore.standingsLoaded}
                     />
                 </Box>
-                {managers
-                    ? managers.map((m, i) => (
-                          <TeamCard user={m} key={m.entry} rank={i + 1} />
-                      ))
+                {sortedManagers
+                    ? sortedManagers.map((m, i) => <TeamCard user={m} key={m.entry} rank={i + 1} />)
                     : null}
             </ScrollView>
         </Fragment>

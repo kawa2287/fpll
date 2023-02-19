@@ -4,6 +4,7 @@ import {
     GetAllOwnedPlayersForMangers,
     GetManagerHistory,
 } from '../res/services/ManagerService';
+import '../schemas/api/type_managerHistory';
 
 // Create Store
 export const useManagerStore = create((set) => ({
@@ -21,14 +22,14 @@ export const useManagerStore = create((set) => ({
         set({ managers: mgrs });
         set({ standingsLoaded: true });
     },
-    fetchAllTimeOwnedPlayers: (managers, gw) =>
-        GetAllOwnedPlayersForMangers(managers, gw, set),
+    fetchAllTimeOwnedPlayers: (managers, gw) => GetAllOwnedPlayersForMangers(managers, gw, set),
     generateManagerStats: (managerPlayers_alltime, allGameweekStats, players) =>
-        GenerateManagerStats(
-            managerPlayers_alltime,
-            allGameweekStats,
-            players,
-            set,
-        ),
+        GenerateManagerStats(managerPlayers_alltime, allGameweekStats, players, set),
     fetchManagerHistories: (managers) => GetManagerHistory(managers, set),
 }));
+
+/** @returns {API_ManagerHistory[]} */
+export const useManagerHistories = () => useManagerStore((s) => s.managerHistories);
+
+/** @returns {Manger[]} */
+export const useManagers = () => useManagerStore((s) => s.managers);

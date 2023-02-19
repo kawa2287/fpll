@@ -15,9 +15,7 @@ export const GetAllOwnedPlayersForMangers = async (managers, gw, set) => {
             for (let i = 1; i <= gw; i++) {
                 // Get list of players chosen for the given game week
                 try {
-                    const response = await fetch(
-                        `/api/entry/${m.entry}/event/${i}/picks/`,
-                    );
+                    const response = await fetch(`/api/entry/${m.entry}/event/${i}/picks/`);
                     const result = await response.json();
                     const picks = result.picks;
 
@@ -60,21 +58,10 @@ export const GetAllOwnedPlayersForMangers = async (managers, gw, set) => {
  * @param {[]} players
  * @param {*} set
  */
-export const GenerateManagerStats = (
-    managerPlayers_alltime,
-    allGameweekStats,
-    players,
-    set,
-) => {
-    if (
-        managerPlayers_alltime.length > 0 &&
-        allGameweekStats.length > 0 &&
-        players.length > 0
-    ) {
+export const GenerateManagerStats = (managerPlayers_alltime, allGameweekStats, players, set) => {
+    if (managerPlayers_alltime.length > 0 && allGameweekStats.length > 0 && players.length > 0) {
         // Init the stats variable
         let managerStats = [];
-
-        console.log(managerPlayers_alltime);
 
         // Loop through all managers
         managerPlayers_alltime.forEach((manager) => {
@@ -85,9 +72,7 @@ export const GenerateManagerStats = (
             });
 
             // filter stats to only include manager players;
-            let filtered = allGameweekStats.filter((stat) =>
-                elementFilter.includes(stat.id),
-            );
+            let filtered = allGameweekStats.filter((stat) => elementFilter.includes(stat.id));
 
             // Reduce down the stats
             let statObj = {};
@@ -132,10 +117,7 @@ const statNames = [
  * @returns
  */
 const ReduceStat = (filteredElements, statName) => {
-    let stat = filteredElements.reduce(
-        (sum, item) => sum + parseFloat(item.stats[statName]),
-        0,
-    );
+    let stat = filteredElements.reduce((sum, item) => sum + parseFloat(item.stats[statName]), 0);
     return stat;
 };
 
@@ -159,21 +141,42 @@ export const GetAllTransfers = async (managerID) => {
  */
 export const GetManagerHistory = async (managers, set) => {
     // Loop through each manager and retrieve their GW histories
-    let managerHistories = [];
     if (managers.length > 0) {
-        for await (let m of managers) {
-            try {
-                const response = await fetch(`/api/entry/${m.entry}/history/`);
-                const result = await response.json();
-
-                // add in manager enrty to object for future reference
-                result['entry'] = m.entry;
-
-                managerHistories.push(result);
-            } catch (error) {
-                console.error(error);
+        let managerHistories = [];
+        if (managers.length > 0) {
+            for (let m of managers) {
+                await _makeManagerHistoryCall(m.entry, managerHistories);
             }
         }
+        set({ managerHistories: managerHistories });
     }
-    set({ managerHistories: managerHistories });
+};
+
+const _makeManagerHistoryCall = async (entry, managerHistories) => {
+    try {
+        const response = await fetch(`/api/entry/${entry}/history/`);
+        const result = await response.json();
+
+        // add in manager enrty to object for future reference
+        result['entry'] = entry;
+
+        managerHistories.push(result);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+/**
+ *
+ * @param {number} entry
+ * @param {Manager[]} managers
+ * @returns {Manager | undefined}
+ */
+export const getManagerInfoByEntry = (entry, managers) => {
+    if (managers.length > 0) {
+        const mgr = managers.find((i) => i.entry === entry);
+        console.log('mgr', mgr);
+        return mgr;
+    }
+    return null;
 };

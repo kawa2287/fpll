@@ -11,6 +11,7 @@ import { useBootstrapStaticStore } from './states/store_BootstrapStatic';
 import { useGameweekStatsStore } from './states/store_GameweekStats';
 import { useLeagueB_store } from './states/store_LeagueB';
 import { useFixtureStore } from './states/store_Fixtures';
+import { useLeagueC_store } from './states/store_LeagueC';
 
 function App() {
     // Determine Screen Type
@@ -21,6 +22,7 @@ function App() {
     const bootstrapStore = useBootstrapStaticStore();
     const gameweekStatsStore = useGameweekStatsStore();
     const leagueB_Store = useLeagueB_store();
+    const leagueC_Store = useLeagueC_store();
     const fixtureStore = useFixtureStore();
     const gw = bootstrapStore.currentGW;
 
@@ -29,6 +31,7 @@ function App() {
         managerStore.fetch();
         bootstrapStore.fetch();
         fixtureStore.fetch();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Secondary Hooks to Build Data
@@ -38,6 +41,8 @@ function App() {
         managerStore.fetchAllTimeOwnedPlayers(managerStore.managers, gw);
         managerStore.fetchManagerHistories(managerStore.managers);
         leagueB_Store.setMatchups(3, managerStore.managers);
+        leagueC_Store.setPotInfo(managerStore.managers, leagueC_Store.buyInPerTeam);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [managerStore.managers, bootstrapStore, gw]);
 
     // Build the manager stats
@@ -47,6 +52,7 @@ function App() {
             gameweekStatsStore.allGameweekStats,
             bootstrapStore.players,
         );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         managerStore.managerPlayers_alltime,
         gameweekStatsStore.allGameweekStats,
@@ -61,6 +67,7 @@ function App() {
             managerStore.managers,
             bootstrapStore.events,
         );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         managerStore.managerHistories,
         managerStore.managers,
